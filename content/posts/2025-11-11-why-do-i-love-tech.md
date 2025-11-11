@@ -4,6 +4,13 @@ date: 2025-11-11T23:05:00.000+05:30
 draft: false
 tags:
   - personal
+ShowReadingTime: true
+ShowShareButtons: true
+ShowPostNavLinks: true
+ShowBreadCrumbs: true
+ShowCodeCopyButtons: true
+ShowWordCount: true
+ShowRssButtonInSectionTermList: true
 ---
 ## Childhood
 
