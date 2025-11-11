@@ -1,6 +1,6 @@
 baseURL: "https://bugaddr.tech/"
 languageCode: "en-us"
-title: "Pranay's Blog"
+title: "Pranay's blog"
 theme: "PaperMod"
 
 params:
