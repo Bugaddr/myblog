@@ -1,25 +1,41 @@
 backend:
   name: github
-  repo: bugaddr/myblog 
+  repo: bugaddr/myblog
   branch: main
   auth_endpoint: api/auth
   base_url: https://bugaddr.tech
+  commit_messages:
+    create: Create {{collection}} “{{slug}}”
+    update: Update {{collection}} “{{slug}}”
+    delete: Delete {{collection}} “{{slug}}”
+    uploadMedia: Upload “{{path}}”
+    deleteMedia: Delete “{{path}}”
+    openAuthoring: '{{message}}'
 
+site_url: https://bugaddr.tech
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 publish_mode: editorial_workflow
+
 collections:
-  - name: "blog"
+  - name: "posts"
     label: "Posts"
     folder: "content/posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Draft", name: "draft", widget: "boolean", default: true}
-      - {label: "Tags", name: "tags", widget: "list", required: true}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - { label: "Tags", name: "tags", widget: "list", required: true }
+      - { label: "Show Reading Time", name: "ShowReadingTime", widget: "boolean", default: true, required: true }
+      - { label: "Show Share Buttons", name: "ShowShareButtons", widget: "boolean", default: true, required: true }
+      - { label: "Show Post Navigation Links", name: "ShowPostNavLinks", widget: "boolean", default: true, required: true }
+      - { label: "Show Breadcrumbs", name: "ShowBreadCrumbs", widget: "boolean", default: true, required: true }
+      - { label: "Show Code Copy Buttons", name: "ShowCodeCopyButtons", widget: "boolean", default: true, required: true }
+      - { label: "Show Word Count", name: "ShowWordCount", widget: "boolean", default: true, required: true }
+      - { label: "Show RSS Button in Section Term List", name: "ShowRssButtonInSectionTermList", widget: "boolean", default: true, required: true }
+      - { label: "Body", name: "body", widget: "markdown" }
   
   - name: "projects"
     label: "Projects"
