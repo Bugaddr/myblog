@@ -1,0 +1,56 @@
+baseURL: "https://bugaddr.tech/"
+languageCode: "en-us"
+title: "Pranay's Blog"
+theme: "PaperMod"
+
+params:
+  defaultTheme: "auto"
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+
+  profileMode:
+    enabled: true
+    title: "Pranay Pawar"
+    subtitle: "Electronics & Cybersecurity Hobbyist"
+    imageUrl: "/images/profile.jpg"
+    imageWidth: 200
+    imageHeight: 200
+    buttons:
+      - name: About
+        url: "/about"
+
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/bugaddr"
+    - name: "twitter"
+      url: "https://twitter.com/bugaddr"
+    - name: "linkedin"
+      url: "https://linkedin.com/in/bugaddr"
+    - name: "email"
+      url: "mailto:pranaypawarofficial@gmail.com"
+
+menu:
+  main:
+    - identifier: "posts"
+      name: "Posts"
+      url: "/posts/"
+      weight: 10
+    - identifier: "about"
+      name: "About"
+      url: "/about/"
+      weight: 20
+    - identifier: "projects"
+      name: "Projects"
+      url: "/projects/"
+      weight: 30
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON

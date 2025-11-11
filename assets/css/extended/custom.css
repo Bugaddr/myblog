@@ -1,0 +1,17 @@
+/* ====== Justify post text ====== */
+.post-content, .entry-content, .single__contents {
+  text-align: justify;
+}
+
+/* ====== Center all images in post content ====== */
+.post-content img, .entry-content img, .single__contents img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Optional: add some vertical spacing around images */
+.post-content img {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
