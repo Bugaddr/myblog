@@ -413,31 +413,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now fix-acer-nitro5-fn10.service
 ```
 
-## Kernel Patch Submission
-
-I've prepared a kernel patch to document this issue in the `acer-wmi` driver. While this won't fix the bug (it's a firmware issue, not a driver bug), it will help future users by logging helpful information at boot.
-
-The patch adds:
-- A quirk entry for the AN515-58 model using DMI matching
-- Boot-time messages directing users to the hwdb workaround
-- Reference links to community discussions
-
-Here's the relevant part of the patch showing DMI matching:
-
-```c
-{
-    .callback = dmi_matched,
-    .ident = "Acer Nitro 5 AN515-58",
-    .matches = {
-        DMI_MATCH(DMI_SYS_VENDOR, "Acer"),
-        DMI_MATCH(DMI_PRODUCT_NAME, "Nitro AN515-58"),
-    },
-    .driver_data = &quirk_acer_nitro_an515_58,
-},
-```
-
-I plan to submit this patch to the Linux kernel mailing list (platform-driver-x86@vger.kernel.org) for inclusion in future kernels.
-
 ## Debugging Tools Used
 
 Throughout this investigation, I used several essential Linux debugging tools:
