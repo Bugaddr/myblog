@@ -1,7 +1,7 @@
 ---
 title: Debugging the Acer Nitro 5 AN515-58 Fn+F10 Keyboard Backlight Bug on Linux
 date: 2025-11-17T03:10:00.000+05:30
-draft: true
+draft: false
 ShowToc: true
 ShowShareButtons: true
 ShowReadingTime: true
