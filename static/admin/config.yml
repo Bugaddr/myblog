@@ -26,7 +26,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Show Table of Contents", name: "ShowToc", widget: "boolean", default: true }
       - { label: "Show Share Buttons", name: "ShowShareButtons", widget: "boolean", default: true }
       - { label: "Show Reading Time", name: "ShowReadingTime", widget: "boolean", default: true }
