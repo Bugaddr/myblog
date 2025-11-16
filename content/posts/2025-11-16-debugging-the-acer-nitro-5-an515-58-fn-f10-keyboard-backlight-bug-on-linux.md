@@ -340,7 +340,7 @@ find /sys/class/leds -name "*kbd*" -o -name "*backlight*" 2>/dev/null
 
 ## The Solution
 
-### Permanent Fix: udev hwdb Rule
+### Permanent Fix: udev hwdb Rule (I am using this)
 
 The proper solution is to create a hardware database (hwdb) rule that remaps the problematic scancode at the input subsystem level.
 
@@ -362,20 +362,6 @@ Breaking down this match string:
 Create `/etc/udev/hwdb.d/90-acer-nitro5-an515-58.hwdb`:
 
 ```
-# Acer Nitro 5 AN515-58 - Fix Fn+F10 scancode 0xef
-# Fn+F10 sends scancode 0xef which incorrectly maps to display brightness down
-# causing display brightness to drop to zero instead of controlling keyboard backlight
-#
-# DMI Information:
-#   Manufacturer: Acer
-#   Product Name: Nitro AN515-58
-#   Family: Nitro 5
-#   Baseboard: Jarvis_RN
-#   BIOS Vendor: Insyde Corp.
-#
-# Issue: Firmware sends wrong scancode (hardware/firmware bug)
-# Solution: Remap scancode 0xef to reserved (disabled)
-
 evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN515-58*
  KEYBOARD_KEY_ef=reserved
 ```
@@ -465,24 +451,6 @@ Throughout this investigation, I used several essential Linux debugging tools:
 | `acpidump` + `iasl` | Extract and decompile ACPI tables | Revealed Windows-centric firmware design |
 | `setkeycodes` | Remap keyboard scancodes | Provided immediate workaround |
 | `udevadm` | Test and apply udev rules | Verified hwdb rule application |
-
-## Lessons Learned
-
-This debugging process taught me several valuable lessons:
-
-1. **Don't assume driver bugs first:** The issue wasn't in `acer-wmi` but at the firmware level.
-
-2. **Use the right tools:** `evtest` provided the exact scancode, which was crucial for the fix.
-
-3. **DMI information is essential:** Proper device matching requires accurate DMI data from `dmidecode`.
-
-4. **Understand the hardware:** Analyzing the ACPI DSDT revealed the Windows-centric firmware design.
-
-5. **Multiple abstraction layers:** The problem spanned firmware → i8042 controller → atkbd driver → input subsystem → userspace.
-
-6. **Document for others:** Many Nitro 5 users face this issue. Proper documentation helps the community.
-
-7. **Hardware databases matter:** The hwdb system provides a clean way to work around firmware bugs without kernel patches.
 
 ## Impact and Affected Models
 
