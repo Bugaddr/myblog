@@ -1,7 +1,7 @@
 ---
+draft: false
 title: Debugging the Acer Nitro 5 AN515-58 Fn+F10 Keyboard Backlight Bug on Linux
 date: 2025-11-17T03:10:00.000+05:30
-draft: false
 ShowToc: true
 ShowShareButtons: true
 ShowReadingTime: true
@@ -413,20 +413,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now fix-acer-nitro5-fn10.service
 ```
 
-## Debugging Tools Used
-
-Throughout this investigation, I used several essential Linux debugging tools:
-
-| Tool | Purpose | Key Learning |
-|------|---------|--------------|
-| `libinput debug-events` | Monitor input events in real-time | Identified wrong key event |
-| `evtest` | Capture raw input device events | Discovered exact scancode 0xef |
-| `dmesg` | View kernel messages | Found atkbd driver errors |
-| `dmidecode` | Extract DMI/SMBIOS information | Obtained hardware identifiers for matching |
-| `acpidump` + `iasl` | Extract and decompile ACPI tables | Revealed Windows-centric firmware design |
-| `setkeycodes` | Remap keyboard scancodes | Provided immediate workaround |
-| `udevadm` | Test and apply udev rules | Verified hwdb rule application |
-
 ## Impact and Affected Models
 
 Based on community reports and DMI analysis, this issue affects multiple Acer Nitro 5 variants:
@@ -452,19 +438,6 @@ What appeared to be a simple key mapping issue turned out to be a complex firmwa
 
 While we cannot fix the firmware itself, the hwdb workaround provides a clean, permanent solution that integrates properly with the Linux input subsystem without requiring kernel patches or custom drivers.
 
-The complete debugging methodology:
-
-1. **Observe the behavior** - Use `libinput` to see what events are generated
-2. **Isolate the component** - Test if drivers are involved (`rmmod acer_wmi`)
-3. **Check kernel logs** - Use `dmesg` to find low-level errors
-4. **Capture raw events** - Use `evtest` to get exact scancodes
-5. **Analyze hardware info** - Use `dmidecode` for proper device identification
-6. **Examine firmware** - Use `acpidump` and `iasl` to understand ACPI design
-7. **Apply workaround** - Use `setkeycodes` for testing, hwdb for permanent fix
-8. **Verify solution** - Use `udevadm` to confirm rule application
-
-If you're experiencing similar issues with Fn keys on laptops, this methodology should help you identify and fix the problem.
-
 ## References
 
 - [Arch Linux Forum Discussion](https://bbs.archlinux.org/viewtopic.php?id=304871)
@@ -474,17 +447,6 @@ If you're experiencing similar issues with Fn keys on laptops, this methodology 
 - [systemd hwdb Documentation](https://www.freedesktop.org/software/systemd/man/hwdb.html)
 - [DMI/SMBIOS Specification](https://www.dmtf.org/standards/smbios)
 - [ACPI Specification](https://uefi.org/specifications)
-
-## System Information
-
-- **Laptop:** Acer Nitro 5 AN515-58
-- **Baseboard:** Jarvis_RN V1.15
-- **BIOS:** Insyde Corp. V1.15 (2023-06-20)
-- **Kernel:** Linux 6.18-rc5
-- **Distribution:** Arch Linux
-- **Desktop Environment:** KDE Plasma (Wayland)
-- **Author:** Bugaddr
-- **Date:** 2025-11-16
 
 ---
 
