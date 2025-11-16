@@ -10,6 +10,16 @@ ShowBreadCrumbs: true
 ShowCodeCopyButtons: true
 ShowWordCount: true
 ShowRssButtonInSectionTermList: true
+tags:
+  - Linux
+  - Kernel
+  - Debugging
+  - Acer
+  - ArchLinux
+  - FirmwareBug
+  - KDE
+  - DMI
+  - ACPI
 ---
 ## Introduction
 
@@ -536,5 +546,3 @@ If you're experiencing similar issues with Fn keys on laptops, this methodology 
 ---
 
 *Have you encountered similar firmware bugs on your laptop? Share your experiences in the comments below or reach out for technical discussions.*
-
-**Tags:** `#Linux` `#Kernel` `#Debugging` `#Acer` `#ArchLinux` `#FirmwareBug` `#KDE` `#DMI` `#ACPI`
