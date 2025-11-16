@@ -219,9 +219,10 @@ B: LED=7
 ```
 
 Key findings:
-- **Device path:** `/devices/platform/i8042/serio0/input/input4`
-- **Event handler:** `event4`
-- **Capabilities:** Standard AT keyboard with LED support (Num Lock, Caps Lock, Scroll Lock)
+
+* **Device path:** `/devices/platform/i8042/serio0/input/input4`
+* **Event handler:** `event4`
+* **Capabilities:** Standard AT keyboard with LED support (Num Lock, Caps Lock, Scroll Lock)
 
 ### Step 7: Testing the Workaround
 
@@ -256,8 +257,8 @@ I analyzed the laptop's ACPI DSDT (Differentiated System Description Table) to u
 ```bash
 sudo acpidump -o acpi.dat
 acpixtract -a acpi.dat
-iasl -d DSDT.dat
-grep -i -A 5 "brightness" dsdt.dsl
+iasl -d dsdt.dat
+grep -i -A 5 -B 5 "brightness\|_Q.*F\|Method.*F10" dsdt.dsl | head -50
 ```
 
 The DSDT revealed ACPI methods designed for display brightness control:
@@ -283,10 +284,11 @@ Method (_Q12, 0, NotSerialized)  // Brightness DOWN
 ```
 
 These ACPI methods reference:
-- `BRTS`: Brightness control variable
-- `HTBN`: Hotkey Button Number
-- `LCD0`: LCD display device (PEG1.PEGP.LCD0)
-- `WMID.FEBC`: Acer's proprietary WMI interface
+
+* `BRTS`: Brightness control variable
+* `HTBN`: Hotkey Button Number
+* `LCD0`: LCD display device (PEG1.PEGP.LCD0)
+* `WMID.FEBC`: Acer's proprietary WMI interface
 
 The key insight here is that these methods notify the display device (`LCD0`) with ACPI notify codes `0x86` (brightness down) and `0x87` (brightness up). There are **no equivalent methods for keyboard backlight control**.
 
@@ -320,9 +322,10 @@ ABBC0F6D-8EA1-11D1-00A0-C90629100000
 ```
 
 The relevant Acer WMI GUIDs:
-- `6AF4F258-B401-42FD-BE91-3D4AC2D7C0D3` - WMID_GUID1 (main WMI interface)
-- `95764E09-FB56-4E83-B31A-37761F60994A` - WMID_GUID2 (device capabilities)
-- `676AA15E-6A47-4D9F-A2CC-1E6D18D14026` - ACERWMID_EVENT_GUID (WMI events)
+
+* `6AF4F258-B401-42FD-BE91-3D4AC2D7C0D3` - WMID_GUID1 (main WMI interface)
+* `95764E09-FB56-4E83-B31A-37761F60994A` - WMID_GUID2 (device capabilities)
+* `676AA15E-6A47-4D9F-A2CC-1E6D18D14026` - ACERWMID_EVENT_GUID (WMI events)
 
 ### No Kernel Interface for Keyboard Backlight
 
@@ -351,13 +354,14 @@ evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN515-58*
 ```
 
 Breaking down this match string:
-- `evdev:atkbd:` - Matches AT keyboard devices through evdev
-- `dmi:` - Uses DMI information for matching
-- `bvn*` - BIOS vendor name (any)
-- `bvr*` - BIOS version (any)
-- `bd*` - BIOS date (any)
-- `svnAcer*` - System vendor name = "Acer"
-- `pnNitro*AN515-58*` - Product name contains "Nitro" and "AN515-58"
+
+* `evdev:atkbd:` - Matches AT keyboard devices through evdev
+* `dmi:` - Uses DMI information for matching
+* `bvn*` - BIOS vendor name (any)
+* `bvr*` - BIOS version (any)
+* `bd*` - BIOS date (any)
+* `svnAcer*` - System vendor name = "Acer"
+* `pnNitro*AN515-58*` - Product name contains "Nitro" and "AN515-58"
 
 Create `/etc/udev/hwdb.d/90-acer-nitro5-an515-58.hwdb`:
 
@@ -417,12 +421,12 @@ sudo systemctl enable --now fix-acer-nitro5-fn10.service
 
 Based on community reports and DMI analysis, this issue affects multiple Acer Nitro 5 variants:
 
-| Model | Status | DMI Product Name | Notes |
-|-------|--------|------------------|-------|
-| AN515-43 | Confirmed | Nitro AN515-43 | Community reports |
-| AN515-54 | Likely | Nitro AN515-54 | Similar firmware |
-| AN515-57 | Likely | Nitro AN515-57 | Similar firmware |
-| AN515-58 | Confirmed | Nitro AN515-58 | This analysis |
+| Model    | Status    | DMI Product Name | Notes             |
+| -------- | --------- | ---------------- | ----------------- |
+| AN515-43 | Confirmed | Nitro AN515-43   | Community reports |
+| AN515-54 | Likely    | Nitro AN515-54   | Similar firmware  |
+| AN515-57 | Likely    | Nitro AN515-57   | Similar firmware  |
+| AN515-58 | Confirmed | Nitro AN515-58   | This analysis     |
 
 If you have a different Nitro 5 model with this issue, the same hwdb fix should work. You can check your exact product name with:
 
@@ -440,14 +444,14 @@ While we cannot fix the firmware itself, the hwdb workaround provides a clean, p
 
 ## References
 
-- [Arch Linux Forum Discussion](https://bbs.archlinux.org/viewtopic.php?id=304871)
-- [Acer Community Report](https://community.acer.com/en/discussion/691263/backlight-brightness-f10-not-working)
-- [Ubuntu StackExchange Discussion](https://askubuntu.com/questions/1308045/brightness-keys-fn-left-right-on-acer-nitro-5-not-working)
-- [Linux Kernel Source: acer-wmi.c](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/platform/x86/acer-wmi.c)
-- [systemd hwdb Documentation](https://www.freedesktop.org/software/systemd/man/hwdb.html)
-- [DMI/SMBIOS Specification](https://www.dmtf.org/standards/smbios)
-- [ACPI Specification](https://uefi.org/specifications)
+* [Arch Linux Forum Discussion](https://bbs.archlinux.org/viewtopic.php?id=304871)
+* [Acer Community Report](https://community.acer.com/en/discussion/691263/backlight-brightness-f10-not-working)
+* [Ubuntu StackExchange Discussion](https://askubuntu.com/questions/1308045/brightness-keys-fn-left-right-on-acer-nitro-5-not-working)
+* [Linux Kernel Source: acer-wmi.c](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/platform/x86/acer-wmi.c)
+* [systemd hwdb Documentation](https://www.freedesktop.org/software/systemd/man/hwdb.html)
+* [DMI/SMBIOS Specification](https://www.dmtf.org/standards/smbios)
+* [ACPI Specification](https://uefi.org/specifications)
 
----
+- - -
 
 *Have you encountered similar firmware bugs on your laptop? Share your experiences in the comments below or reach out for technical discussions.*
