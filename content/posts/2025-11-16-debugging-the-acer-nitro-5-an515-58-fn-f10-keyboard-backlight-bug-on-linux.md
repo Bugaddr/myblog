@@ -10,9 +10,17 @@ ShowBreadCrumbs: true
 ShowCodeCopyButtons: true
 ShowWordCount: true
 ShowRssButtonInSectionTermList: true
+tags:
+  - Linux
+  - Kernel
+  - Debugging
+  - Acer
+  - ArchLinux
+  - FirmwareBug
+  - KDE
+  - DMI
+  - ACPI
 ---
-# Debugging the Acer Nitro 5 AN515-58 Fn+F10 Keyboard Backlight Bug on Linux
-
 ## Introduction
 
 While using my Acer Nitro 5 AN515-58 laptop running Arch Linux with KDE Plasma on Wayland, I encountered a frustrating bug: pressing **Fn+F10** (which should control the keyboard backlight) caused my display brightness to suddenly drop to zero instead. This post documents my investigation into the root cause and the solution I developed.
@@ -538,5 +546,3 @@ If you're experiencing similar issues with Fn keys on laptops, this methodology 
 ---
 
 *Have you encountered similar firmware bugs on your laptop? Share your experiences in the comments below or reach out for technical discussions.*
-
-**Tags:** `#Linux` `#Kernel` `#Debugging` `#Acer` `#ArchLinux` `#FirmwareBug` `#KDE` `#DMI` `#ACPI`
