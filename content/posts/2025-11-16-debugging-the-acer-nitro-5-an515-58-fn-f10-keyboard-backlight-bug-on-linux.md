@@ -350,7 +350,7 @@ The proper solution is to create a hardware database (hwdb) rule that remaps the
 The hwdb rule uses DMI information for precise device matching. Here's how the matching works:
 
 ```
-evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN515-58*
+evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN*515-58:pvr*
 ```
 
 Breaking down this match string:
@@ -366,8 +366,9 @@ Breaking down this match string:
 Create `/etc/udev/hwdb.d/90-acer-nitro5-an515-58.hwdb`:
 
 ```
-evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN515-58*
- KEYBOARD_KEY_ef=reserved
+evdev:atkbd:dmi:bvn*:bvr*:bd*:svnAcer*:pnNitro*AN*515-58:pvr*
+ KEYBOARD_KEY_ef=kbdillumup                             # Fn+F10
+ KEYBOARD_KEY_f0=kbdillumdown                           # Fn+F9
 ```
 
 Apply the rule:
@@ -403,7 +404,7 @@ Before=display-manager.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/setkeycodes ef 0
+ExecStart=/usr/bin/setkeycodes ef 0 && /usr/bin/setkeycodes f0 0
 RemainAfterExit=yes
 
 [Install]
