@@ -2,14 +2,14 @@ backend:
   name: github
   repo: bugaddr/myblog
   branch: main
-  auth_endpoint: api/auth
   base_url: https://bugaddr.tech
+  auth_endpoint: api/auth
   commit_messages:
-    create: Create {{collection}} “{{slug}}”
-    update: Update {{collection}} “{{slug}}”
-    delete: Delete {{collection}} “{{slug}}”
-    uploadMedia: Upload “{{path}}”
-    deleteMedia: Delete “{{path}}”
+    create: Create {{collection}} "{{slug}}"
+    update: Update {{collection}} "{{slug}}"
+    delete: Delete {{collection}} "{{slug}}"
+    uploadMedia: Upload "{{path}}"
+    deleteMedia: Delete "{{path}}"
     openAuthoring: '{{message}}'
 
 site_url: https://bugaddr.tech
@@ -26,15 +26,41 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Show Table of Contents", name: "ShowToc", widget: "boolean", default: true }
-      - { label: "Show Share Buttons", name: "ShowShareButtons", widget: "boolean", default: true }
-      - { label: "Show Reading Time", name: "ShowReadingTime", widget: "boolean", default: true }
-      - { label: "Show Post Navigation Links", name: "ShowPostNavLinks", widget: "boolean", default: true }
-      - { label: "Show Breadcrumbs", name: "ShowBreadCrumbs", widget: "boolean", default: true }
-      - { label: "Show Code Copy Buttons", name: "ShowCodeCopyButtons", widget: "boolean", default: true }
-      - { label: "Show Word Count", name: "ShowWordCount", widget: "boolean", default: true }
-      - { label: "Show RSS Button In Section Term List", name: "ShowRssButtonInSectionTermList", widget: "boolean", default: true }
-      - { label: "Tags", name: "tags", widget: "list", required: true }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Weight", name: "weight", widget: "number", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Keywords", name: "keywords", widget: "list", required: false }
+      - { label: "Show Table of Contents", name: "showtoc", widget: "boolean", default: false, required: false }
+      - { label: "TOC Open by Default", name: "tocopen", widget: "boolean", default: false, required: false }
+      - { label: "Hide Meta", name: "hidemeta", widget: "boolean", default: false, required: false }
+      - { label: "Comments", name: "comments", widget: "boolean", default: false, required: false }
+      - { label: "Disable Share", name: "disableShare", widget: "boolean", default: false, required: false }
+      - { label: "Disable HLJs", name: "disableHLJS", widget: "boolean", default: false, required: false }
+      - { label: "Hide Summary", name: "hideSummary", widget: "boolean", default: false, required: false }
+      - { label: "Search Hidden", name: "searchHidden", widget: "boolean", default: false, required: false }
+      - { label: "Show Breadcrumbs", name: "ShowBreadCrumbs", widget: "boolean", default: false, required: false }
+      - { label: "Show Post Nav Links", name: "ShowPostNavLinks", widget: "boolean", default: false, required: false }
+      - { label: "Show Code Copy Buttons", name: "ShowCodeCopyButtons", widget: "boolean", default: false, required: false }
+      - { label: "Show Reading Time", name: "ShowReadingTime", widget: "boolean", default: false, required: false }
+      - { label: "Show RSS Button in Section Term List", name: "ShowRssButtonInSectionTermList", widget: "boolean", default: false, required: false }
+      - { label: "Show Word Count", name: "ShowWordCount", widget: "boolean", default: false, required: false }
+      - { label: "Use Hugo TOC", name: "UseHugoToc", widget: "boolean", default: false, required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [
+          { label: "Image", name: "image", widget: "string", required: false },
+          { label: "Alt Text", name: "alt", widget: "string", required: false },
+          { label: "Caption", name: "caption", widget: "string", required: false },
+          { label: "Relative", name: "relative", widget: "boolean", default: false, required: false },
+          { label: "Hidden", name: "hidden", widget: "boolean", default: false, required: false }
+        ]}
+      - { label: "Edit Post", name: "editPost", widget: "object", required: false, fields: [
+          { label: "URL", name: "URL", widget: "string", required: false },
+          { label: "Text", name: "Text", widget: "string", required: false },
+          { label: "Append File Path", name: "appendFilePath", widget: "boolean", default: true, required: false }
+        ]}
       - { label: "Body", name: "body", widget: "markdown" }
   
   - name: "projects"
@@ -43,9 +69,18 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "Date", name: "date", widget: "datetime"}
-      - {label: "Description", name: "description", widget: "text"}
-      - {label: "Image", name: "image", widget: "image", required: false}
-      - {label: "Link", name: "link", widget: "string", required: false}
-      - {label: "Body", name: "body", widget: "markdown"}
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Weight", name: "weight", widget: "number", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Cover Image", name: "cover", widget: "object", required: false, fields: [
+          { label: "Image", name: "image", widget: "string", required: false },
+          { label: "Alt Text", name: "alt", widget: "string", required: false },
+          { label: "Caption", name: "caption", widget: "string", required: false },
+          { label: "Relative", name: "relative", widget: "boolean", default: false, required: false }
+        ]}
+      - { label: "Link", name: "link", widget: "string", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
