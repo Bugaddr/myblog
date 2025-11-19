@@ -1,6 +1,14 @@
 ---
 draft: false
 title: Debugging Acer Nitro 5 Fn+F10 Keyboard Backlight Bug on Linux
+description: Detailed debugging of an Acer Nitro 5 AN515-58 running Linux where
+  Fn+F10 (keyboard backlight) emitted a scancode interpreted as brightness-down.
+  The post walks through evtest/libinput/ACPI inspection, explains the
+  firmware/driver mismatch, and provides a safe hwdb/udev workaround that remaps
+  the offending scancode for affected Nitro 5 models.
+summary: "Investigated Fn+F10 on an Acer Nitro 5 (AN515-58) causing screen
+  brightness to fall to zero. Root cause: firmware/ACPI scancode mapping — fixed
+  with a DMI-targeted hwdb/udev rule."
 tags:
   - Linux
   - Kernel
@@ -11,6 +19,7 @@ tags:
   - KDE
   - DMI
   - ACPI
+tocopen: false
 comments: false
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
@@ -21,7 +30,6 @@ ShowWordCount: true
 ShowToc: true
 date: 2025-11-17T03:10:00.000+05:30
 showtoc: true
-tocopen: false
 ShowShareButtons: true
 ---
 ## Introduction
