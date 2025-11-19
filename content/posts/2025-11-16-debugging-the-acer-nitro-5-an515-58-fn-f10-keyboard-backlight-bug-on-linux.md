@@ -1,15 +1,6 @@
 ---
 draft: false
-title: Debugging the Acer Nitro 5 AN515-58 Fn+F10 Keyboard Backlight Bug on Linux
-date: 2025-11-17T03:10:00.000+05:30
-ShowToc: true
-ShowShareButtons: true
-ShowReadingTime: true
-ShowPostNavLinks: true
-ShowBreadCrumbs: true
-ShowCodeCopyButtons: true
-ShowWordCount: true
-ShowRssButtonInSectionTermList: true
+title: Debugging Acer Nitro 5 Fn+F10 Keyboard Backlight Bug on Linux
 tags:
   - Linux
   - Kernel
@@ -20,6 +11,18 @@ tags:
   - KDE
   - DMI
   - ACPI
+comments: false
+ShowBreadCrumbs: true
+ShowPostNavLinks: true
+ShowCodeCopyButtons: true
+ShowReadingTime: true
+ShowRssButtonInSectionTermList: true
+ShowWordCount: true
+ShowToc: true
+date: 2025-11-17T03:10:00.000+05:30
+showtoc: true
+tocopen: false
+ShowShareButtons: true
 ---
 ## Introduction
 
