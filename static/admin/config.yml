@@ -26,7 +26,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Summary", name: "summary", widget: "text", required: false }
       - { label: "Author", name: "author", widget: "string", required: false }
@@ -71,7 +70,6 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: false }
       - { label: "Description", name: "description", widget: "text", required: false }
       - { label: "Summary", name: "summary", widget: "text", required: false }
       - { label: "Weight", name: "weight", widget: "number", required: false }
