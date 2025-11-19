@@ -2,12 +2,12 @@
 title: IMD Radar
 date: 2025-11-20T04:52:00.000+05:30
 draft: false
-description: " Doppler Radar & Satellite Imagery dashboard "
-summary: A sleek, responsive, and user-friendly web application to view the
+description: A sleek, responsive, and user-friendly web application to view the
   latest Doppler Weather Radar and Satellite imagery directly from the India
   Meteorological Department (IMD). This tool allows users to quickly select a
   station and browse through various meteorological image products in a clean,
   modern interface with an interactive image viewer.
+summary: " Doppler Radar & Satellite Imagery dashboard"
 cover:
   relative: false
 link: https://radar.bugaddr.tech/
