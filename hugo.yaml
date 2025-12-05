@@ -10,7 +10,7 @@ params:
     enabled: true
     title: "Pranay Pawar"
     subtitle: "Electronics & Cybersecurity Hobbyist"
-    imageUrl: "/images/profile.jpg"
+    imageUrl: "/images/profile.webp"
     imageWidth: 200
     imageHeight: 200
     buttons:
